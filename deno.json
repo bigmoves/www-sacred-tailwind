@@ -1,5 +1,7 @@
 {
-  "name": "@bigmoves/srcl-tailwind",
+  "name": "@bigmoves/srcl",
+  "version": "0.1.0",
+  "license": "MIT",
   "imports": {
     "@modules/": "./modules/",
     "@common/": "./common/",
@@ -17,7 +19,5 @@
     "jsxImportSourceTypes": "@types/react",
     "types": ["node"]
   },
-  "exports": {
-    ".": "./mod.ts"
-  }
+  "exports": "./mod.ts"
 }
