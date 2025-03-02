@@ -1,15 +1,15 @@
-'use client';
+import clsx from "clsx";
 
-import clsx from 'clsx';
+import * as React from "react";
 
-import * as React from 'react';
-
-import ActionButton from '@components/ActionButton';
-import DropdownMenuTrigger from '@components/DropdownMenuTrigger';
+import ActionButton from "@components/ActionButton";
+import DropdownMenuTrigger from "@components/DropdownMenuTrigger";
 
 const styles = {
   root: clsx(""),
-  full: clsx("grid grid-cols-[repeat(auto-fit,minmax(60px,1fr))] whitespace-nowrap [&>*>*]:w-full")
+  full: clsx(
+    "grid grid-cols-[repeat(auto-fit,minmax(60px,1fr))] whitespace-nowrap [&>*>*]:w-full"
+  ),
 };
 
 export const ButtonGroup = (props: any) => {
@@ -22,7 +22,11 @@ export const ButtonGroup = (props: any) => {
       {props.items.map((each: any) => {
         if (each.items) {
           return (
-            <DropdownMenuTrigger key={each.body} items={each.items} hotkey={each.openHotkey}>
+            <DropdownMenuTrigger
+              key={each.body}
+              items={each.items}
+              hotkey={each.openHotkey}
+            >
               <ActionButton hotkey={each.hotkey} isSelected={each.selected}>
                 {each.body}
               </ActionButton>
@@ -31,7 +35,12 @@ export const ButtonGroup = (props: any) => {
         }
 
         return (
-          <ActionButton key={each.body} onClick={each.onClick} hotkey={each.hotkey} isSelected={each.selected}>
+          <ActionButton
+            key={each.body}
+            onClick={each.onClick}
+            hotkey={each.hotkey}
+            isSelected={each.selected}
+          >
             {each.body}
           </ActionButton>
         );

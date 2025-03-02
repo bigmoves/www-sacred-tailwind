@@ -1,27 +1,28 @@
-'use client';
-
-import * as React from 'react';
-import clsx from 'clsx';
+import * as React from "react";
+import clsx from "clsx";
 
 const styles = {
-  root: clsx("inline-block w-[1ch] text-inherit h-[calc(var(--font-size)*var(--theme-line-height-base))] align-bottom")
+  root: clsx(
+    "inline-block w-[1ch] text-inherit h-[calc(var(--font-size)*var(--theme-line-height-base))] align-bottom"
+  ),
 };
 
 const SEQUENCES = [
-  ['⠁', '⠂', '⠄', '⡀', '⢀', '⠠', '⠐', '⠈'],
-  ['⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'],
-  ['▖', '▘', '▝', '▗'],
-  ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█', '▇', '▆', '▅', '▄', '▃', '▁'],
-  ['▉', '▊', '▋', '▌', '▍', '▎', '▏', '▎', '▍', '▌', '▋', '▊', '▉'],
-  ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙'],
-  ['┤', '┘', '┴', '└', '├', '┌', '┬', '┐'],
-  ['◢', '◣', '◤', '◥'],
-  ['◰', '◳', '◲', '◱'],
-  ['◴', '◷', '◶', '◵'],
-  ['◐', '◓', '◑', '◒'],
+  ["⠁", "⠂", "⠄", "⡀", "⢀", "⠠", "⠐", "⠈"],
+  ["⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"],
+  ["▖", "▘", "▝", "▗"],
+  ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▁"],
+  ["▉", "▊", "▋", "▌", "▍", "▎", "▏", "▎", "▍", "▌", "▋", "▊", "▉"],
+  ["←", "↖", "↑", "↗", "→", "↘", "↓", "↙"],
+  ["┤", "┘", "┴", "└", "├", "┌", "┬", "┐"],
+  ["◢", "◣", "◤", "◥"],
+  ["◰", "◳", "◲", "◱"],
+  ["◴", "◷", "◶", "◵"],
+  ["◐", "◓", "◑", "◒"],
 ];
 
-export interface BlockLoaderProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'children'> {
+export interface BlockLoaderProps
+  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
   mode?: number;
 }
 

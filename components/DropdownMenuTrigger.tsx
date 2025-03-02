@@ -1,17 +1,15 @@
-'use client';
+import * as Position from "@common/position.ts";
+import * as React from "react";
+import * as Utilities from "@common/utilities.ts";
 
-import * as Position from '@common/position';
-import * as React from 'react';
-import * as Utilities from '@common/utilities';
+import DropdownMenu from "@components/DropdownMenu.tsx";
+import OutsideElementEvent from "@components/detectors/OutsideElementEvent.tsx";
 
-import DropdownMenu from '@components/DropdownMenu';
-import OutsideElementEvent from '@components/detectors/OutsideElementEvent';
-
-import { createPortal } from 'react-dom';
-import { useHotkeys } from '@modules/hotkeys';
+import { createPortal } from "react-dom";
+import { useHotkeys } from "@modules/hotkeys/index.ts";
 
 const styles = {
-  root: "inline-block relative"
+  root: "inline-block relative",
 };
 
 export interface DropdownMenuTriggerProps {
@@ -20,12 +18,19 @@ export interface DropdownMenuTriggerProps {
   hotkey?: string;
 }
 
-export function DropdownMenuTrigger({ children, items, hotkey }: DropdownMenuTriggerProps) {
+export function DropdownMenuTrigger({
+  children,
+  items,
+  hotkey,
+}: DropdownMenuTriggerProps) {
   const [open, setOpen] = React.useState(false);
   const [focusChildren, setFocusChildren] = React.useState(false);
   const [willClose, setWillClose] = React.useState(false);
-  const [placement, setPlacement] = React.useState<Position.Placement>('bottom');
-  const [position, setPosition] = React.useState<{ top: number; left: number }>({ top: 0, left: 0 });
+  const [placement, setPlacement] =
+    React.useState<Position.Placement>("bottom");
+  const [position, setPosition] = React.useState<{ top: number; left: number }>(
+    { top: 0, left: 0 }
+  );
 
   const triggerRef = React.useRef<HTMLElement>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
@@ -70,7 +75,10 @@ export function DropdownMenuTrigger({ children, items, hotkey }: DropdownMenuTri
     if (!open || !triggerRef.current || !elementRef.current) return;
 
     const updatePosition = () => {
-      const { placement, position } = Position.calculate(triggerRef.current!, elementRef.current!);
+      const { placement, position } = Position.calculate(
+        triggerRef.current!,
+        elementRef.current!
+      );
       setPlacement(placement);
       setPosition(position);
     };
@@ -80,14 +88,18 @@ export function DropdownMenuTrigger({ children, items, hotkey }: DropdownMenuTri
 
     const handleResizeOrScroll = () => updatePosition();
     const observer = new MutationObserver(() => updatePosition());
-    observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+    observer.observe(document.body, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
 
-    window.addEventListener('resize', handleResizeOrScroll);
-    window.addEventListener('scroll', handleResizeOrScroll, true);
+    window.addEventListener("resize", handleResizeOrScroll);
+    window.addEventListener("scroll", handleResizeOrScroll, true);
 
     return () => {
-      window.removeEventListener('resize', handleResizeOrScroll);
-      window.removeEventListener('scroll', handleResizeOrScroll, true);
+      window.removeEventListener("resize", handleResizeOrScroll);
+      window.removeEventListener("scroll", handleResizeOrScroll, true);
       observer.disconnect();
     };
   }, [open]);
@@ -100,7 +112,7 @@ export function DropdownMenuTrigger({ children, items, hotkey }: DropdownMenuTri
             ref={elementRef}
             items={items}
             style={{
-              position: 'absolute',
+              position: "absolute",
               top: `${position.top}px`,
               left: `${position.left}px`,
               zIndex: `var(--z-index-page-dropdown-menus)`,

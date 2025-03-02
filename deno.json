@@ -1,0 +1,23 @@
+{
+  "name": "@bigmoves/srcl-tailwind",
+  "imports": {
+    "@modules/": "./modules/",
+    "@common/": "./common/",
+    "@components/": "./components/",
+    "react": "npm:react@19.0.0",
+    "react-dom": "npm:react-dom@19.0.0",
+    "@types/react": "npm:@types/react@19.0.10",
+    "@types/react-dom": "npm:@types/react-dom@19.0.4",
+    "clsx": "npm:clsx@2.1.1"
+  },
+  "compilerOptions": {
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "jsxImportSourceTypes": "@types/react",
+    "types": ["node"]
+  },
+  "exports": {
+    ".": "./mod.ts"
+  }
+}

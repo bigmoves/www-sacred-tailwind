@@ -1,12 +1,10 @@
-'use client';
-
-import * as React from 'react';
-import clsx from 'clsx';
+import * as React from "react";
+import clsx from "clsx";
 
 const styles = {
   root: "whitespace-nowrap [-webkit-text-size-adjust:100%]",
   item: "cursor-pointer focus:outline-0 focus:border-0 focus:bg-[var(--theme-focused-foreground)]",
-  empty: "opacity-50"
+  empty: "opacity-50",
 };
 
 export interface TreeViewProps {
@@ -21,7 +19,17 @@ export interface TreeViewProps {
   title: string;
 }
 
-export const TreeView: React.FC<TreeViewProps> = ({ defaultValue = false, title, children, depth = 0, isFile = false, isRoot = false, isLastChild = false, style, parentLines = [] }) => {
+export const TreeView: React.FC<TreeViewProps> = ({
+  defaultValue = false,
+  title,
+  children,
+  depth = 0,
+  isFile = false,
+  isRoot = false,
+  isLastChild = false,
+  style,
+  parentLines = [],
+}) => {
   const [show, setShow] = React.useState<boolean>(defaultValue);
 
   const onToggleShow = (): void => {
@@ -31,20 +39,20 @@ export const TreeView: React.FC<TreeViewProps> = ({ defaultValue = false, title,
   const hasChildren = React.Children.count(children) > 0;
   const isEmptyFolder = !isFile && !hasChildren;
 
-  const spacing = parentLines.map((line) => (line ? '│ . ' : '. . ')).join('');
-  const endPrefix = isLastChild ? '└───' : '├───';
+  const spacing = parentLines.map((line) => (line ? "│ . " : ". . ")).join("");
+  const endPrefix = isLastChild ? "└───" : "├───";
   const prefix = `${spacing}${endPrefix}`;
-  const icon = isFile ? ' ' : show ? '╦ ' : '╤ ';
+  const icon = isFile ? " " : show ? "╦ " : "╤ ";
 
   const updatedParentLines = [...parentLines, !isLastChild];
 
   return (
     <div className={styles.root} style={style}>
-      <div 
-        tabIndex={0} 
-        role="button" 
-        onClick={onToggleShow} 
-        className={clsx(styles.item, isEmptyFolder && styles.empty)} 
+      <div
+        tabIndex={0}
+        role="button"
+        onClick={onToggleShow}
+        className={clsx(styles.item, isEmptyFolder && styles.empty)}
         aria-expanded={show}
       >
         {prefix}

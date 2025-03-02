@@ -1,13 +1,11 @@
-'use client';
+import * as React from "react";
+import clsx from "clsx";
 
-import * as React from 'react';
-import clsx from 'clsx';
-
-import { useModals } from '@components/page/ModalContext';
+import { useModals } from "@components/page/ModalContext.tsx";
 
 const styles = {
   root: "items-center bottom-0 flex justify-center left-0 pointer-events-none fixed right-0 top-0 z-[var(--z-index-page-modals)]",
-  item: "pointer-events-auto absolute transition-[opacity,transform] duration-[0.2s,0.4s] ease-[ease,ease]"
+  item: "pointer-events-auto absolute transition-[opacity,transform] duration-[0.2s,0.4s] ease-[ease,ease]",
 };
 
 export interface ModalStackProps {}

@@ -1,12 +1,12 @@
-'use client';
+import clsx from "clsx";
 
-import clsx from 'clsx';
-
-import * as React from 'react';
+import * as React from "react";
 
 const styles = {
-  root: clsx("block bg-[var(--theme-border-subdued)] whitespace-nowrap text-left align-bottom overflow-hidden relative"),
-  measure: clsx("invisible absolute pointer-events-none")
+  root: clsx(
+    "block bg-[var(--theme-border-subdued)] whitespace-nowrap text-left align-bottom overflow-hidden relative"
+  ),
+  measure: clsx("invisible absolute pointer-events-none"),
 };
 
 export interface BarProgressProps {
@@ -15,7 +15,11 @@ export interface BarProgressProps {
   fillChar?: string;
 }
 
-export const BarProgress: React.FC<BarProgressProps> = ({ intervalRate, progress, fillChar = '░' }) => {
+export const BarProgress: React.FC<BarProgressProps> = ({
+  intervalRate,
+  progress,
+  fillChar = "░",
+}) => {
   const [currentProgress, setCurrentProgress] = React.useState(progress ?? 0);
   const [containerWidth, setContainerWidth] = React.useState(0);
   const [charWidth, setCharWidth] = React.useState(0);
@@ -24,7 +28,7 @@ export const BarProgress: React.FC<BarProgressProps> = ({ intervalRate, progress
   const measureRef = React.useRef<HTMLSpanElement>(null);
 
   React.useEffect(() => {
-    if (typeof progress === 'number') {
+    if (typeof progress === "number") {
       setCurrentProgress(progress);
       return;
     }
@@ -73,7 +77,14 @@ export const BarProgress: React.FC<BarProgressProps> = ({ intervalRate, progress
   const barStr = fillChar.repeat(filledChars);
 
   return (
-    <div className={styles.root} ref={containerRef} aria-valuenow={cappedProgress} aria-valuemin={0} aria-valuemax={100} role="progressbar">
+    <div
+      className={styles.root}
+      ref={containerRef}
+      aria-valuenow={cappedProgress}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      role="progressbar"
+    >
       <span ref={measureRef} className={styles.measure}>
         {fillChar}
       </span>

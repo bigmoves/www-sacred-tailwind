@@ -1,6 +1,4 @@
-'use client';
-
-import * as React from 'react';
+import * as React from "react";
 
 export interface DataTableProps {
   data: string[][];
@@ -17,7 +15,11 @@ const BASE_FOREGROUND_RGBA: RGBAColor = { r: 98, g: 98, b: 98, a: 0.5 };
 const BASE_BACKGROUND_RGBA: RGBAColor = { r: 168, g: 168, b: 168, a: 0.5 };
 const ALPHA = 0.45;
 
-function interpolateColor(color1: RGBAColor, color2: RGBAColor, factor: number): RGBAColor {
+function interpolateColor(
+  color1: RGBAColor,
+  color2: RGBAColor,
+  factor: number
+): RGBAColor {
   return {
     r: Math.round(color1.r + factor * (color2.r - color1.r)),
     g: Math.round(color1.g + factor * (color2.g - color1.g)),
@@ -30,8 +32,9 @@ const styles = {
   root: "relative w-full border-spacing-0 max-w-[64ch]",
   body: "",
   row: "transition-transform duration-500 ease-in-out border-spacing-0 first:font-normal focus:bg-[var(--theme-focused-foreground)] focus:outline-0",
-  column: "border-0 outline-0 pr-[1ch] transition-colors duration-500 ease-in-out",
-  changed: "animate-[flash_2000ms_ease]"
+  column:
+    "border-0 outline-0 pr-[1ch] transition-colors duration-500 ease-in-out",
+  changed: "animate-[flash_2000ms_ease]",
 };
 
 export const DataTable: React.FC<DataTableProps> = ({ data }) => {
@@ -39,9 +42,10 @@ export const DataTable: React.FC<DataTableProps> = ({ data }) => {
   const prevDataRef = React.useRef<string[][]>(data);
 
   React.useEffect(() => {
-    const rows = tableRef.current?.querySelectorAll<HTMLTableRowElement>('tr') || [];
+    const rows =
+      tableRef.current?.querySelectorAll<HTMLTableRowElement>("tr") || [];
     for (let i = 1; i < data.length; i++) {
-      const cells = rows[i]?.querySelectorAll<HTMLTableCellElement>('td');
+      const cells = rows[i]?.querySelectorAll<HTMLTableCellElement>("td");
       if (!cells) continue;
       for (let j = 0; j < data[i].length; j++) {
         const cell = cells[j];
@@ -57,7 +61,7 @@ export const DataTable: React.FC<DataTableProps> = ({ data }) => {
   }, [data]);
 
   React.useEffect(() => {
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = `
       @keyframes flash {
         0% { background-color: var(--theme-focused-foreground-subdued); }
@@ -74,24 +78,30 @@ export const DataTable: React.FC<DataTableProps> = ({ data }) => {
     const activeElement = document.activeElement;
     if (!activeElement) return;
     switch (event.key) {
-      case 'Enter':
+      case "Enter":
         event.preventDefault();
         if (activeElement instanceof HTMLTableCellElement) {
           activeElement.click();
         }
         break;
-      case 'ArrowUp':
-      case 'ArrowDown':
-      case 'ArrowLeft':
-      case 'ArrowRight':
+      case "ArrowUp":
+      case "ArrowDown":
+      case "ArrowLeft":
+      case "ArrowRight":
         event.preventDefault();
         if (!(activeElement instanceof HTMLTableCellElement)) return;
-        const direction = event.key === 'ArrowUp' || event.key === 'ArrowLeft' ? 'previous' : 'next';
-        const allCells = Array.from(tableRef.current?.querySelectorAll<HTMLTableCellElement>('td') || []);
+        const direction =
+          event.key === "ArrowUp" || event.key === "ArrowLeft"
+            ? "previous"
+            : "next";
+        const allCells = Array.from(
+          tableRef.current?.querySelectorAll<HTMLTableCellElement>("td") || []
+        );
         const currentIndex = allCells.indexOf(activeElement);
         if (currentIndex === -1) return;
-        let nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
-        if (direction === 'previous') {
+        let nextIndex =
+          direction === "next" ? currentIndex + 1 : currentIndex - 1;
+        if (direction === "previous") {
           if (nextIndex < 0) nextIndex = allCells.length - 1;
         } else {
           if (nextIndex >= allCells.length) nextIndex = 0;
@@ -108,23 +118,45 @@ export const DataTable: React.FC<DataTableProps> = ({ data }) => {
     <table className={styles.root} ref={tableRef} onKeyDown={handleKeyDown}>
       <tbody className={styles.body}>
         {data.map((row, rowIndex) => (
-          <tr key={rowIndex} className={styles.row} tabIndex={0} onClick={() => alert('testing')}>
+          <tr
+            key={rowIndex}
+            className={styles.row}
+            tabIndex={0}
+            onClick={() => alert("testing")}
+          >
             {row.map((cellContent, colIndex) => {
               let backgroundColor: string;
               if (rowIndex === 0) {
-                const lightnessFactor = row.length > 1 ? colIndex / (row.length - 1) : 0;
-                const newColor = interpolateColor(BASE_FOREGROUND_RGBA, targetColorHeader, lightnessFactor);
-                backgroundColor = `rgba(${newColor.r}, ${newColor.g}, ${newColor.b}, ${newColor.a.toFixed(2)})`;
+                const lightnessFactor =
+                  row.length > 1 ? colIndex / (row.length - 1) : 0;
+                const newColor = interpolateColor(
+                  BASE_FOREGROUND_RGBA,
+                  targetColorHeader,
+                  lightnessFactor
+                );
+                backgroundColor = `rgba(${newColor.r}, ${newColor.g}, ${
+                  newColor.b
+                }, ${newColor.a.toFixed(2)})`;
               } else {
                 const numRows = data.length - 1;
                 const maxIndexSum = numRows - 1 + (row.length - 1) || 1;
                 const indexSum = rowIndex - 1 + colIndex;
                 const lightnessFactor = indexSum / maxIndexSum;
-                const newColor = interpolateColor(BASE_BACKGROUND_RGBA, targetColorData, lightnessFactor);
-                backgroundColor = `rgba(${newColor.r}, ${newColor.g}, ${newColor.b}, ${newColor.a.toFixed(2)})`;
+                const newColor = interpolateColor(
+                  BASE_BACKGROUND_RGBA,
+                  targetColorData,
+                  lightnessFactor
+                );
+                backgroundColor = `rgba(${newColor.r}, ${newColor.g}, ${
+                  newColor.b
+                }, ${newColor.a.toFixed(2)})`;
               }
               return (
-                <td key={colIndex} className={styles.column} style={{ backgroundColor }}>
+                <td
+                  key={colIndex}
+                  className={styles.column}
+                  style={{ backgroundColor }}
+                >
                   {cellContent}
                 </td>
               );

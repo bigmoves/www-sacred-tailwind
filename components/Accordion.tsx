@@ -1,15 +1,14 @@
-'use client';
+import * as React from "react";
+import clsx from "clsx";
 
-import * as React from 'react';
-import clsx from 'clsx';
-
-import Row from '@components/Row';
+import Row from "@components/Row.tsx";
 
 const styles = {
   flex: "flex items-center justify-between hover:bg-[var(--theme-focused-foreground)]",
   icon: "flex-shrink-0 select-none cursor-pointer",
-  content: "min-w-[10%] w-full select-none cursor-pointer transition-[padding] duration-200 ease",
-  active: "pl-[1ch]"
+  content:
+    "min-w-[10%] w-full select-none cursor-pointer transition-[padding] duration-200 ease",
+  active: "pl-[1ch]",
 };
 
 export interface AccordionProps {
@@ -18,7 +17,11 @@ export interface AccordionProps {
   children?: React.ReactNode;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({ defaultValue = false, title, children }) => {
+export const Accordion: React.FC<AccordionProps> = ({
+  defaultValue = false,
+  title,
+  children,
+}) => {
   const [show, setShow] = React.useState<boolean>(defaultValue);
   const accordionRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -28,13 +31,21 @@ export const Accordion: React.FC<AccordionProps> = ({ defaultValue = false, titl
 
   return (
     <>
-      <Row ref={accordionRef} tabIndex={0} role="button" onClick={toggleShow} aria-expanded={show}>
+      <Row
+        ref={accordionRef}
+        tabIndex={0}
+        role="button"
+        onClick={toggleShow}
+        aria-expanded={show}
+      >
         <div className={clsx(styles.flex)}>
-          <span className={styles.icon}>{show ? '▾' : '▸'}</span>
-          <span className={clsx(styles.content, show && styles.active)}>{title}</span>
+          <span className={styles.icon}>{show ? "▾" : "▸"}</span>
+          <span className={clsx(styles.content, show && styles.active)}>
+            {title}
+          </span>
         </div>
       </Row>
-      {show && <Row style={{ paddingLeft: '1ch' }}>{children}</Row>}
+      {show && <Row style={{ paddingLeft: "1ch" }}>{children}</Row>}
     </>
   );
 };

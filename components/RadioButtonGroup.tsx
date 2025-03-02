@@ -1,16 +1,18 @@
-'use client';
+import * as React from "react";
 
-import * as React from 'react';
-
-import RadioButton from '@components/RadioButton';
+import RadioButton from "@components/RadioButton.tsx";
 
 export interface RadioButtonGroupProps {
   options: { value: string; label: string }[];
   defaultValue?: string;
 }
 
-export const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({ options, defaultValue = '' }) => {
-  const [selectedValue, setSelectedValue] = React.useState<string>(defaultValue);
+export const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
+  options,
+  defaultValue = "",
+}) => {
+  const [selectedValue, setSelectedValue] =
+    React.useState<string>(defaultValue);
 
   const handleSelect = (value: string) => {
     setSelectedValue(value);
@@ -19,7 +21,13 @@ export const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({ options, def
   return (
     <>
       {options.map((option) => (
-        <RadioButton key={option.value} name="example" value={option.value} selected={selectedValue === option.value} onSelect={handleSelect}>
+        <RadioButton
+          key={option.value}
+          name="example"
+          value={option.value}
+          selected={selectedValue === option.value}
+          onSelect={handleSelect}
+        >
           {option.label}
         </RadioButton>
       ))}

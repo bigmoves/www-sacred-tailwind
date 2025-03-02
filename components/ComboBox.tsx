@@ -1,14 +1,12 @@
-'use client';
+import * as React from "react";
 
-import * as React from 'react';
-
-import AlertBanner from '@components/AlertBanner';
-import ButtonGroup from '@components/ButtonGroup';
-import CardDouble from '@components/CardDouble';
-import Input from '@components/Input';
+import AlertBanner from "@components/AlertBanner.tsx";
+import ButtonGroup from "@components/ButtonGroup.tsx";
+import CardDouble from "@components/CardDouble.tsx";
+import Input from "@components/Input.tsx";
 
 const styles = {
-  root: "p-0"
+  root: "p-0",
 };
 
 export interface ComboBoxProps {
@@ -17,12 +15,14 @@ export interface ComboBoxProps {
 }
 
 export function ComboBox({ data, label }: ComboBoxProps) {
-  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const filtered = React.useMemo(() => {
     const sliced = data.slice(1);
     if (!searchTerm) return [];
-    return sliced.filter((entry) => entry[0].toLowerCase().includes(searchTerm.toLowerCase()));
+    return sliced.filter((entry) =>
+      entry[0].toLowerCase().includes(searchTerm.toLowerCase())
+    );
   }, [data, searchTerm]);
 
   const displayed = React.useMemo(() => {
@@ -37,20 +37,37 @@ export function ComboBox({ data, label }: ComboBoxProps) {
     return sliced.slice(0, 5);
   }, [filtered, data, searchTerm]);
 
-  const handleChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  }, []);
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(e.target.value);
+    },
+    []
+  );
 
   return (
     <>
       <div className={styles.root}>
-        <Input autoComplete="off" isBlink label={label} name="input_test_blink" value={searchTerm} onChange={handleChange} />
+        <Input
+          autoComplete="off"
+          isBlink
+          label={label}
+          name="input_test_blink"
+          value={searchTerm}
+          onChange={handleChange}
+        />
       </div>
       {displayed.map((entry) => (
         <CardDouble key={entry[0]} title={entry[0]}>
           <AlertBanner>{entry[1]}</AlertBanner>
           <br />
-          <ButtonGroup isFull items={[{ body: 'FAVORITE' }, { body: 'DONATE' }, { body: 'LEARN MORE' }]} />
+          <ButtonGroup
+            isFull
+            items={[
+              { body: "FAVORITE" },
+              { body: "DONATE" },
+              { body: "LEARN MORE" },
+            ]}
+          />
         </CardDouble>
       ))}
     </>

@@ -1,38 +1,49 @@
-'use client';
-
-import * as React from 'react';
-import * as Utilities from '@common/utilities';
-import { clsx } from 'clsx';
+import * as React from "react";
+import * as Utilities from "@common/utilities.ts";
+import { clsx } from "clsx";
 
 const styles = {
   root: "relative",
   placeholder: "opacity-70 italic",
-  displayed: "whitespace-pre-wrap break-words pointer-events-none break-anywhere",
-  hidden: "whitespace-pre-wrap break-words pointer-events-none break-anywhere absolute invisible w-full overflow-auto",
+  displayed:
+    "whitespace-pre-wrap break-words pointer-events-none break-anywhere",
+  hidden:
+    "whitespace-pre-wrap break-words pointer-events-none break-anywhere absolute invisible w-full overflow-auto",
   focused: "group",
   blink: "!animate-[blink_1s_steps(1)_infinite]",
   block: [
     "inline-block min-w-[1ch] bg-[var(--theme-text)] h-[calc(var(--font-size)*var(--theme-line-height-base))] align-bottom",
-    "group-[.focused]/textarea:bg-[var(--theme-focused-foreground)]"
+    "group-[.focused]/textarea:bg-[var(--theme-focused-foreground)]",
   ].join(" "),
-  hiddenElement: "absolute top-0 left-0 w-full h-full text-transparent bg-transparent caret-transparent border-none resize-none outline-none overflow-hidden p-0 m-0 leading-[var(--theme-line-height-base)] text-[var(--font-size)] font-inherit"
+  hiddenElement:
+    "absolute top-0 left-0 w-full h-full text-transparent bg-transparent caret-transparent border-none resize-none outline-none overflow-hidden p-0 m-0 leading-[var(--theme-line-height-base)] text-[var(--font-size)] font-inherit",
 };
 
-export type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  autoPlay?: string;
-  autoPlaySpeedMS?: number;
-  isBlink?: boolean;
-};
-export function TextArea({ autoPlay, autoPlaySpeedMS = 40, isBlink, placeholder, onChange, ...rest }: TextAreaProps) {
+export type TextAreaProps =
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    autoPlay?: string;
+    autoPlaySpeedMS?: number;
+    isBlink?: boolean;
+  };
+export function TextArea({
+  autoPlay,
+  autoPlaySpeedMS = 40,
+  isBlink,
+  placeholder,
+  onChange,
+  ...rest
+}: TextAreaProps) {
   const textAreaRef = React.useRef<HTMLTextAreaElement | null>(null);
   const measurementRef = React.useRef<HTMLDivElement | null>(null);
 
-  const [text, setText] = React.useState<string>(rest.defaultValue?.toString() || rest.value?.toString() || '');
+  const [text, setText] = React.useState<string>(
+    rest.defaultValue?.toString() || rest.value?.toString() || ""
+  );
   const [isAutoPlaying, setIsAutoPlaying] = React.useState<boolean>(!!autoPlay);
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
   const [selectionStart, setSelectionStart] = React.useState<number>(0);
 
-  const autoPlayIntervalRef = React.useRef<NodeJS.Timeout | null>(null);
+  const autoPlayIntervalRef = React.useRef<number | null>(null);
   const autoPlayIndexRef = React.useRef<number>(0);
 
   const [currentLineIndex, setCurrentLineIndex] = React.useState<number>(0);
@@ -60,8 +71,9 @@ export function TextArea({ autoPlay, autoPlaySpeedMS = 40, isBlink, placeholder,
     if (autoPlay && !rest.value && !rest.defaultValue) {
       setIsAutoPlaying(true);
       autoPlayIndexRef.current = 0;
-      setText('');
-      if (autoPlayIntervalRef.current) clearInterval(autoPlayIntervalRef.current);
+      setText("");
+      if (autoPlayIntervalRef.current)
+        clearInterval(autoPlayIntervalRef.current);
 
       autoPlayIntervalRef.current = setInterval(() => {
         autoPlayIndexRef.current++;
@@ -78,20 +90,21 @@ export function TextArea({ autoPlay, autoPlaySpeedMS = 40, isBlink, placeholder,
     }
 
     return () => {
-      if (autoPlayIntervalRef.current) clearInterval(autoPlayIntervalRef.current);
+      if (autoPlayIntervalRef.current)
+        clearInterval(autoPlayIntervalRef.current);
     };
   }, [autoPlay, rest.value, rest.defaultValue]);
 
   const resizeTextArea = React.useCallback(() => {
     if (!textAreaRef.current) return;
-    textAreaRef.current.style.height = 'auto';
+    textAreaRef.current.style.height = "auto";
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
   }, []);
 
   React.useEffect(() => {
     resizeTextArea();
-    window.addEventListener('resize', resizeTextArea);
-    return () => window.removeEventListener('resize', resizeTextArea);
+    window.addEventListener("resize", resizeTextArea);
+    return () => window.removeEventListener("resize", resizeTextArea);
   }, [resizeTextArea]);
 
   const onHandleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -137,17 +150,17 @@ export function TextArea({ autoPlay, autoPlaySpeedMS = 40, isBlink, placeholder,
     const computedStyle = window.getComputedStyle(measurementEl);
     const lineHeightStr = computedStyle.lineHeight;
     let lineHeight = 20;
-    if (lineHeightStr.endsWith('px')) {
+    if (lineHeightStr.endsWith("px")) {
       lineHeight = parseFloat(lineHeightStr);
     }
 
     const countLines = (content: string) => {
-      measurementEl.textContent = content || '\u00A0';
+      measurementEl.textContent = content || "\u00A0";
       const height = measurementEl.offsetHeight;
       return Math.round(height / lineHeight);
     };
 
-    const displayString = text || placeholder || '';
+    const displayString = text || placeholder || "";
 
     const textBeforeCaret = text.substring(0, selectionStart);
     const textAfterCaret = text.substring(selectionStart);
@@ -160,38 +173,63 @@ export function TextArea({ autoPlay, autoPlaySpeedMS = 40, isBlink, placeholder,
   }, [text, selectionStart, placeholder]);
 
   const onHandleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'ArrowUp' && currentLineIndex === 0) {
+    if (e.key === "ArrowUp" && currentLineIndex === 0) {
       e.preventDefault();
-      const previousFocusable = Utilities.findNextFocusable(document.activeElement, 'previous');
+      const previousFocusable = Utilities.findNextFocusable(
+        document.activeElement,
+        "previous"
+      );
       previousFocusable?.focus();
-    } else if (e.key === 'ArrowDown' && currentLineIndex === totalLines) {
+    } else if (e.key === "ArrowDown" && currentLineIndex === totalLines) {
       e.preventDefault();
-      const nextFocusable = Utilities.findNextFocusable(document.activeElement, 'next');
+      const nextFocusable = Utilities.findNextFocusable(
+        document.activeElement,
+        "next"
+      );
       nextFocusable?.focus();
     }
   };
 
   const isPlaceholderVisible = !text && placeholder;
 
-  const containerClasses = clsx(styles.root, isFocused && 'focused group/textarea');
+  const containerClasses = clsx(
+    styles.root,
+    isFocused && "focused group/textarea"
+  );
 
   return (
     <div className={containerClasses}>
-      <div className={clsx(
-        styles.displayed,
-        isPlaceholderVisible && [
-          styles.placeholder,
-          "group-[.focused]/textarea:bg-[var(--theme-focused-foreground)]"
-        ]
-      )}>
+      <div
+        className={clsx(
+          styles.displayed,
+          isPlaceholderVisible && [
+            styles.placeholder,
+            "group-[.focused]/textarea:bg-[var(--theme-focused-foreground)]",
+          ]
+        )}
+      >
         {isPlaceholderVisible ? placeholder : text.substring(0, selectionStart)}
-        {!isPlaceholderVisible && <span className={clsx(styles.block, isBlink && styles.blink)}></span>}
+        {!isPlaceholderVisible && (
+          <span className={clsx(styles.block, isBlink && styles.blink)}></span>
+        )}
         {!isPlaceholderVisible && text.substring(selectionStart)}
       </div>
 
       <div ref={measurementRef} className={styles.hidden}></div>
 
-      <textarea className={styles.hiddenElement} ref={textAreaRef} value={text} aria-placeholder={placeholder} onFocus={onHandleFocus} onBlur={onHandleBlur} onKeyDown={onHandleKeyDown} onChange={onHandleChange} onSelect={onHandleSelect} onClick={onHandleClick} {...rest} />
+      <textarea
+        className={styles.hiddenElement}
+        ref={textAreaRef}
+        value={text}
+        aria-placeholder={placeholder}
+        onFocus={onHandleFocus}
+        onBlur={onHandleBlur}
+        onKeyDown={onHandleKeyDown}
+        onChange={onHandleChange}
+        onSelect={onHandleSelect}
+        onClick={onHandleClick}
+        {...rest}
+      />
     </div>
   );
 }

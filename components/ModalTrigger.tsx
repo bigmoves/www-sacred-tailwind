@@ -1,8 +1,6 @@
-'use client';
+import * as React from "react";
 
-import * as React from 'react';
-
-import { useModals } from '@components/page/ModalContext';
+import { useModals } from "@components/page/ModalContext";
 
 export interface ModalTriggerProps {
   children: React.ReactElement<{ onClick?: React.MouseEventHandler }>;
@@ -10,7 +8,11 @@ export interface ModalTriggerProps {
   modalProps?: Record<string, any>;
 }
 
-export function ModalTrigger({ children, modal, modalProps = {} }: ModalTriggerProps) {
+export function ModalTrigger({
+  children,
+  modal,
+  modalProps = {},
+}: ModalTriggerProps) {
   const { open } = useModals();
 
   const onHandleOpenModal = () => {

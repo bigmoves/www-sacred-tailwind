@@ -1,8 +1,6 @@
-'use client';
+import * as React from "react";
 
-import * as React from 'react';
-
-import DataTable from '@components/DataTable';
+import DataTable from "@components/DataTable";
 
 export const UpdatingDataTable = (props: any) => {
   const [tableData, setTableData] = React.useState(props.data);
@@ -14,19 +12,24 @@ export const UpdatingDataTable = (props: any) => {
         const rows = prevData.slice(1);
 
         const updatedRows = rows.map((row: any) => {
-          const currentPrice = parseFloat(row[2].replace('$', ''));
+          const currentPrice = parseFloat(row[2].replace("$", ""));
           const currentHoldings = parseInt(row[3], 10);
           const priceChangeFactor = 1 + (Math.random() - 0.5) * 0.1;
           const newPrice = currentPrice * priceChangeFactor;
           const holdingsChange = Math.floor((Math.random() - 0.5) * 20);
           const newHoldings = Math.max(1, currentHoldings + holdingsChange);
 
-          return [row[0], row[1], `$${newPrice.toFixed(2)}`, newHoldings.toString()];
+          return [
+            row[0],
+            row[1],
+            `$${newPrice.toFixed(2)}`,
+            newHoldings.toString(),
+          ];
         });
 
         updatedRows.sort((a: any, b: any) => {
-          const priceA = parseFloat(a[2].replace('$', ''));
-          const priceB = parseFloat(b[2].replace('$', ''));
+          const priceA = parseFloat(a[2].replace("$", ""));
+          const priceB = parseFloat(b[2].replace("$", ""));
           return priceB - priceA;
         });
 

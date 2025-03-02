@@ -1,13 +1,13 @@
-'use client';
+import * as React from "react";
+import clsx from "clsx";
 
-import * as React from 'react';
-import clsx from 'clsx';
-
-import ActionButton from '@components/ActionButton';
+import ActionButton from "@components/ActionButton.tsx";
 
 const styles = {
   container: clsx("w-full h-auto relative"),
-  root: clsx("block w-full bg-transparent focus:outline-0 focus:shadow-[inset_0_0_0_1px_var(--theme-focused-foreground)]")
+  root: clsx(
+    "block w-full bg-transparent focus:outline-0 focus:shadow-[inset_0_0_0_1px_var(--theme-focused-foreground)]"
+  ),
 };
 
 export interface PlatformerProps {
@@ -47,7 +47,11 @@ export const CanvasPlatformer: React.FC<PlatformerProps> = ({ rows = 25 }) => {
 
   const positionRef = React.useRef<Position>({ x: 50, y: 0 });
   const velocityRef = React.useRef<Position>({ x: 0, y: 0 });
-  const keysRef = React.useRef<Keys>({ left: false, right: false, jump: false });
+  const keysRef = React.useRef<Keys>({
+    left: false,
+    right: false,
+    jump: false,
+  });
   const platformBlocksRef = React.useRef<Block[]>([]);
 
   React.useEffect(() => {
@@ -66,14 +70,17 @@ export const CanvasPlatformer: React.FC<PlatformerProps> = ({ rows = 25 }) => {
       platformBlocksRef.current = [];
       const numBlocks = Math.floor(parentWidth / CHARACTER_WIDTH);
       for (let i = 0; i < numBlocks; i++) {
-        platformBlocksRef.current.push({ x: i * CHARACTER_WIDTH, y: platformY });
+        platformBlocksRef.current.push({
+          x: i * CHARACTER_WIDTH,
+          y: platformY,
+        });
       }
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, [rows]);
 
@@ -88,12 +95,13 @@ export const CanvasPlatformer: React.FC<PlatformerProps> = ({ rows = 25 }) => {
     };
 
     canvas.tabIndex = 0;
-    canvas.addEventListener('focus', handleFocus);
-    canvas.addEventListener('blur', handleBlur);
+    canvas.addEventListener("focus", handleFocus);
+    canvas.addEventListener("blur", handleBlur);
 
     const handleClick = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const x = Math.floor((e.clientX - rect.left) / CHARACTER_WIDTH) * CHARACTER_WIDTH;
+      const x =
+        Math.floor((e.clientX - rect.left) / CHARACTER_WIDTH) * CHARACTER_WIDTH;
       const y = Math.floor((e.clientY - rect.top) / LINE_HEIGHT) * LINE_HEIGHT;
       const blocks = platformBlocksRef.current;
       const existingIndex = blocks.findIndex((b) => b.x === x && b.y === y);
@@ -104,51 +112,59 @@ export const CanvasPlatformer: React.FC<PlatformerProps> = ({ rows = 25 }) => {
       }
     };
 
-    canvas.addEventListener('click', handleClick);
+    canvas.addEventListener("click", handleClick);
 
     return () => {
-      canvas.removeEventListener('focus', handleFocus);
-      canvas.removeEventListener('blur', handleBlur);
-      canvas.removeEventListener('click', handleClick);
+      canvas.removeEventListener("focus", handleFocus);
+      canvas.removeEventListener("blur", handleBlur);
+      canvas.removeEventListener("click", handleClick);
     };
   }, []);
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!focused) return;
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.code === 'Space') {
+      if (
+        e.key === "ArrowLeft" ||
+        e.key === "ArrowRight" ||
+        e.code === "Space"
+      ) {
         e.preventDefault();
         e.stopPropagation();
       }
-      if (e.key === 'ArrowLeft') keysRef.current.left = true;
-      if (e.key === 'ArrowRight') keysRef.current.right = true;
-      if (e.code === 'Space') keysRef.current.jump = true;
+      if (e.key === "ArrowLeft") keysRef.current.left = true;
+      if (e.key === "ArrowRight") keysRef.current.right = true;
+      if (e.code === "Space") keysRef.current.jump = true;
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
       if (!focused) return;
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.code === 'Space') {
+      if (
+        e.key === "ArrowLeft" ||
+        e.key === "ArrowRight" ||
+        e.code === "Space"
+      ) {
         e.preventDefault();
         e.stopPropagation();
       }
-      if (e.key === 'ArrowLeft') keysRef.current.left = false;
-      if (e.key === 'ArrowRight') keysRef.current.right = false;
-      if (e.code === 'Space') keysRef.current.jump = false;
+      if (e.key === "ArrowLeft") keysRef.current.left = false;
+      if (e.key === "ArrowRight") keysRef.current.right = false;
+      if (e.code === "Space") keysRef.current.jump = false;
     };
 
-    window.addEventListener('keydown', handleKeyDown, { capture: true });
-    window.addEventListener('keyup', handleKeyUp, { capture: true });
+    window.addEventListener("keydown", handleKeyDown, { capture: true });
+    window.addEventListener("keyup", handleKeyUp, { capture: true });
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown, { capture: true });
-      window.removeEventListener('keyup', handleKeyUp, { capture: true });
+      window.removeEventListener("keydown", handleKeyDown, { capture: true });
+      window.removeEventListener("keyup", handleKeyUp, { capture: true });
     };
   }, [focused]);
 
   React.useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const loop = () => {
@@ -161,8 +177,12 @@ export const CanvasPlatformer: React.FC<PlatformerProps> = ({ rows = 25 }) => {
       const keys = keysRef.current;
       const blocks = platformBlocksRef.current;
 
-      const themeBorderColor = getComputedStyle(document.body).getPropertyValue('--theme-border').trim();
-      const themeTextColor = getComputedStyle(document.body).getPropertyValue('--theme-text').trim();
+      const themeBorderColor = getComputedStyle(document.body)
+        .getPropertyValue("--theme-border")
+        .trim();
+      const themeTextColor = getComputedStyle(document.body)
+        .getPropertyValue("--theme-text")
+        .trim();
 
       ctx.fillStyle = themeBorderColor;
       for (const b of blocks) {
@@ -186,8 +206,13 @@ export const CanvasPlatformer: React.FC<PlatformerProps> = ({ rows = 25 }) => {
 
       let groundY = h;
       for (const b of blocks) {
-        const horizontallyOverlapping = pos.x + CHARACTER_WIDTH > b.x && pos.x < b.x + CHARACTER_WIDTH;
-        if (horizontallyOverlapping && oldY + LINE_HEIGHT <= b.y && pos.y + LINE_HEIGHT >= b.y) {
+        const horizontallyOverlapping =
+          pos.x + CHARACTER_WIDTH > b.x && pos.x < b.x + CHARACTER_WIDTH;
+        if (
+          horizontallyOverlapping &&
+          oldY + LINE_HEIGHT <= b.y &&
+          pos.y + LINE_HEIGHT >= b.y
+        ) {
           if (b.y < groundY) groundY = b.y;
         }
       }
@@ -216,7 +241,8 @@ export const CanvasPlatformer: React.FC<PlatformerProps> = ({ rows = 25 }) => {
     let h = canvas.height;
     let groundY = h;
     for (const b of platformBlocksRef.current) {
-      const horizontallyOverlapping = pos.x + CHARACTER_WIDTH > b.x && pos.x < b.x + CHARACTER_WIDTH;
+      const horizontallyOverlapping =
+        pos.x + CHARACTER_WIDTH > b.x && pos.x < b.x + CHARACTER_WIDTH;
       if (horizontallyOverlapping && pos.y + LINE_HEIGHT <= b.y) {
         if (b.y < groundY) groundY = b.y;
       }
@@ -235,7 +261,8 @@ export const CanvasPlatformer: React.FC<PlatformerProps> = ({ rows = 25 }) => {
     if (!canvas) return;
     const pos = positionRef.current;
     pos.x += CHARACTER_WIDTH;
-    if (pos.x > canvas.width - CHARACTER_WIDTH) pos.x = canvas.width - CHARACTER_WIDTH;
+    if (pos.x > canvas.width - CHARACTER_WIDTH)
+      pos.x = canvas.width - CHARACTER_WIDTH;
   };
 
   return (

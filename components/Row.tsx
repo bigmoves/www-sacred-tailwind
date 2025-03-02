@@ -1,23 +1,23 @@
-'use client';
-
-import * as React from 'react';
+import * as React from "react";
 
 const styles = {
-  row: "block outline-0 border-0 transition-[background] duration-200 ease focus:bg-[var(--theme-focused-foreground)]"
+  row: "block outline-0 border-0 transition-[background] duration-200 ease focus:bg-[var(--theme-focused-foreground)]",
 };
 
 export type RowProps = React.HTMLAttributes<HTMLElement> & {
   children?: React.ReactNode;
 };
 
-export const Row = React.forwardRef<HTMLElement, RowProps>(({ children, ...rest }, ref) => {
-  return (
-    <section className={styles.row} ref={ref} {...rest}>
-      {children}
-    </section>
-  );
-});
+export const Row = React.forwardRef<HTMLElement, RowProps>(
+  ({ children, ...rest }, ref) => {
+    return (
+      <section className={styles.row} ref={ref} {...rest}>
+        {children}
+      </section>
+    );
+  }
+);
 
-Row.displayName = 'Row';
+Row.displayName = "Row";
 
 export default Row;
