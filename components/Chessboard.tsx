@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../common/utilities.ts";
 
 const FILE = ["A", "B", "C", "D", "E", "F", "G", "H"];
 const RANK = [8, 7, 6, 5, 4, 3, 2, 1];

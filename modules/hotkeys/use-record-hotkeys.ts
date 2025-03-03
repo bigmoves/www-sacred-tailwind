@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { mapKey } from "@modules/hotkeys/parse-hotkeys.ts";
+import { mapKey } from "./parse-hotkeys.ts";
 
 export default function useRecordHotkeys() {
   const [keys, setKeys] = useState(new Set<string>());

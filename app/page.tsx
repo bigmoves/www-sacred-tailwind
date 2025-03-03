@@ -1,7 +1,7 @@
 import "../styles.css";
 
 import * as Constants from "@common/constants";
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../common/utilities.ts";
 
 // NOTE(jimmylee): This is a kitchen sink of all components.
 // When forking or remixing, you'll likely only need a few.

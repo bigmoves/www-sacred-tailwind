@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 
-import { useModals } from "@components/page/ModalContext.tsx";
+import { useModals } from "./page/ModalContext.tsx";
 
 const styles = {
   root: "items-center bottom-0 flex justify-center left-0 pointer-events-none fixed right-0 top-0 z-[var(--z-index-page-modals)]",

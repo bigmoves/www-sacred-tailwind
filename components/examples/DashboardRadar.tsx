@@ -1,12 +1,12 @@
 import * as React from "react";
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../../common/utilities.ts";
 
-import ActionButton from "@components/ActionButton";
-import ButtonGroup from "@components/ButtonGroup";
-import Card from "@components/Card";
-import RowSpaceBetween from "@components/RowSpaceBetween";
-import SidebarLayout from "@components/SidebarLayout";
-import Sphere from "@components/svg/Sphere";
+import ActionButton from "../ActionButton.tsx";
+import ButtonGroup from "../ButtonGroup.tsx";
+import Card from "../Card.tsx";
+import RowSpaceBetween from "../RowSpaceBetween.tsx";
+import SidebarLayout from "../SidebarLayout.tsx";
+import Sphere from "../svg/Sphere.tsx";
 
 const styles = {
   customSidebar:

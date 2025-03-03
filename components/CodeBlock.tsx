@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../common/utilities.ts";
 
 const styles = {
   root: "block font-normal overflow-auto font-inherit bg-[var(--theme-border-subdued)] scrollbar-none",

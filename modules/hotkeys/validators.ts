@@ -2,12 +2,9 @@
 // Vendored from
 // https://github.com/JohannesKlauss/react-hotkeys-hook/blob/main/src/validators.ts
 
-import { FormTags, Hotkey, Scopes, Trigger } from "@modules/hotkeys/types.ts";
-import {
-  isHotkeyPressed,
-  isReadonlyArray,
-} from "@modules/hotkeys/is-hotkey-pressed.ts";
-import { mapKey } from "@modules/hotkeys/parse-hotkeys.ts";
+import { FormTags, Hotkey, Scopes, Trigger } from "./types.ts";
+import { isHotkeyPressed, isReadonlyArray } from "./is-hotkey-pressed.ts";
+import { mapKey } from "./parse-hotkeys.ts";
 
 export function maybePreventDefault(
   e: KeyboardEvent,

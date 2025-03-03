@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import Card from "@components/Card.tsx";
-import Row from "@components/Row.tsx";
-import RowSpaceBetween from "@components/RowSpaceBetween.tsx";
-import Table from "@components/Table.tsx";
-import TableRow from "@components/TableRow.tsx";
-import TableColumn from "@components/TableColumn.tsx";
-import TextArea from "@components/TextArea.tsx";
+import Card from "../Card.tsx";
+import Row from "../Row.tsx";
+import RowSpaceBetween from "../RowSpaceBetween.tsx";
+import Table from "../Table.tsx";
+import TableRow from "../TableRow.tsx";
+import TableColumn from "../TableColumn.tsx";
+import TextArea from "../TextArea.tsx";
 
 export type AS400Props = React.HTMLAttributes<HTMLElement> & {
   children?: React.ReactNode;

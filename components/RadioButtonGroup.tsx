@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import RadioButton from "@components/RadioButton.tsx";
+import RadioButton from "./RadioButton.tsx";
 
 export interface RadioButtonGroupProps {
   options: { value: string; label: string }[];

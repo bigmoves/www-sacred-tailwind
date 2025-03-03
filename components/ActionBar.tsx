@@ -1,7 +1,7 @@
-import * as React from 'react';
-import clsx from 'clsx';
+import * as React from "react";
+import clsx from "clsx";
 
-import ButtonGroup from '@components/ButtonGroup';
+import ButtonGroup from "./ButtonGroup.tsx";
 
 export interface ActionBarItem {
   hotkey?: string;
@@ -17,7 +17,7 @@ export interface ActionBarProps {
 }
 
 const styles = {
-  root: "bg-[var(--theme-background)] shadow-[inset_0_0_0_1px_var(--theme-border)]"
+  root: "bg-[var(--theme-background)] shadow-[inset_0_0_0_1px_var(--theme-border)]",
 };
 
 export const ActionBar: React.FC<ActionBarProps> = ({ items }) => {

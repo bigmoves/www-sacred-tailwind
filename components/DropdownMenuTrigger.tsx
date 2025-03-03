@@ -1,12 +1,12 @@
-import * as Position from "@common/position.ts";
+import * as Position from "../common/position.ts";
 import * as React from "react";
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../common/utilities.ts";
 
-import DropdownMenu from "@components/DropdownMenu.tsx";
-import OutsideElementEvent from "@components/detectors/OutsideElementEvent.tsx";
+import DropdownMenu from "./DropdownMenu.tsx";
+import OutsideElementEvent from "./detectors/OutsideElementEvent.tsx";
 
 import { createPortal } from "react-dom";
-import { useHotkeys } from "@modules/hotkeys/index.ts";
+import { useHotkeys } from "../modules/hotkeys/index.ts";
 
 const styles = {
   root: "inline-block relative",

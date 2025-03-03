@@ -2,8 +2,8 @@ import clsx from "clsx";
 
 import * as React from "react";
 
-import ActionButton from "@components/ActionButton";
-import DropdownMenuTrigger from "@components/DropdownMenuTrigger";
+import ActionButton from "./ActionButton.tsx";
+import DropdownMenuTrigger from "./DropdownMenuTrigger.tsx";
 
 const styles = {
   root: clsx(""),

@@ -1,16 +1,19 @@
 {
-  "name": "@bigmoves/srcl",
+  "name": "@bigmoves/srcl-tailwind",
   "version": "0.1.0",
   "license": "MIT",
+  "tasks": {
+    "compile:css": "tailwindcss -i ./styles.css -o ./output.css"
+  },
   "imports": {
-    "@modules/": "./modules/",
-    "@common/": "./common/",
-    "@components/": "./components/",
+    "autoprefixer": "npm:autoprefixer@^10.4.20",
+    "postcss": "npm:postcss@^8.5.3",
     "react": "npm:react@19.0.0",
     "react-dom": "npm:react-dom@19.0.0",
     "@types/react": "npm:@types/react@19.0.10",
     "@types/react-dom": "npm:@types/react-dom@19.0.4",
-    "clsx": "npm:clsx@2.1.1"
+    "clsx": "npm:clsx@2.1.1",
+    "tailwindcss": "npm:tailwindcss@^3.4.17"
   },
   "compilerOptions": {
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -19,5 +22,6 @@
     "jsxImportSourceTypes": "@types/react",
     "types": ["node"]
   },
+  "exclude": ["app"],
   "exports": "./mod.ts"
 }

@@ -8,7 +8,7 @@ import {
   Options,
   OptionsOrDependencyArray,
   RefType,
-} from "@modules/hotkeys/types.ts";
+} from "./types.ts";
 import {
   DependencyList,
   RefCallback,
@@ -18,11 +18,7 @@ import {
   useLayoutEffect,
   useRef,
 } from "react";
-import {
-  mapKey,
-  parseHotkey,
-  parseKeysHookInput,
-} from "@modules/hotkeys/parse-hotkeys.ts";
+import { mapKey, parseHotkey, parseKeysHookInput } from "./parse-hotkeys.ts";
 import {
   isHotkeyEnabled,
   isHotkeyEnabledOnTag,
@@ -30,15 +26,15 @@ import {
   isKeyboardEventTriggeredByInput,
   isScopeActive,
   maybePreventDefault,
-} from "@modules/hotkeys/validators.ts";
-import { useHotkeysContext } from "@modules/hotkeys/hotkeys-provider.tsx";
-import { useBoundHotkeysProxy } from "@modules/hotkeys/bound-hotkeys-proxy-provider.tsx";
-import useDeepEqualMemo from "@modules/hotkeys/use-deep-equal-memo.ts";
+} from "./validators.ts";
+import { useHotkeysContext } from "./hotkeys-provider.tsx";
+import { useBoundHotkeysProxy } from "./bound-hotkeys-proxy-provider.tsx";
+import useDeepEqualMemo from "./use-deep-equal-memo.ts";
 import {
   isReadonlyArray,
   pushToCurrentlyPressedKeys,
   removeFromCurrentlyPressedKeys,
-} from "@modules/hotkeys/is-hotkey-pressed.ts";
+} from "./is-hotkey-pressed.ts";
 
 const stopPropagation = (e: KeyboardEvent): void => {
   e.stopPropagation();

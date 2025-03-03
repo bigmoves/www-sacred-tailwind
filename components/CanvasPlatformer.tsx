@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 
-import ActionButton from "@components/ActionButton.tsx";
+import ActionButton from "./ActionButton.tsx";
 
 const styles = {
   container: clsx("w-full h-auto relative"),

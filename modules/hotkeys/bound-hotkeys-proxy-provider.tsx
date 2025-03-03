@@ -3,7 +3,7 @@
 // https://github.com/JohannesKlauss/react-hotkeys-hook/blob/main/src/BoundHotkeysProxyProvider.tsx
 
 import { createContext, ReactNode, useContext } from "react";
-import { Hotkey } from "@modules/hotkeys/types.ts";
+import { Hotkey } from "./types.ts";
 
 type BoundHotkeysProxyProviderType = {
   addHotkey: (hotkey: Hotkey) => void;

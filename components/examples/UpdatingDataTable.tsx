@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import DataTable from "@components/DataTable";
+import DataTable from "../DataTable.tsx";
 
 export const UpdatingDataTable = (props: any) => {
   const [tableData, setTableData] = React.useState(props.data);

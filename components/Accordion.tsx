@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 
-import Row from "@components/Row.tsx";
+import Row from "./Row.tsx";
 
 const styles = {
   flex: "flex items-center justify-between hover:bg-[var(--theme-focused-foreground)]",

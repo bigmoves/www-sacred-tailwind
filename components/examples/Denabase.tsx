@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import ActionButton from "@components/ActionButton";
-import Card from "@components/Card";
-import Divider from "@components/Divider";
-import Row from "@components/Row";
-import RowSpaceBetween from "@components/RowSpaceBetween";
-import SidebarLayout from "@components/SidebarLayout";
+import ActionButton from "../ActionButton.tsx";
+import Card from "../Card.tsx";
+import Divider from "../Divider.tsx";
+import Row from "../Row.tsx";
+import RowSpaceBetween from "../RowSpaceBetween.tsx";
+import SidebarLayout from "../SidebarLayout.tsx";
 
 const styles = {
   root: "min-w-[68ch] mt-[calc(var(--theme-line-height-base)*1rem)]",

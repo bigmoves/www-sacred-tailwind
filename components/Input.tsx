@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../common/utilities.ts";
 
 const styles = {
   root: "relative block",

@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import AlertBanner from "@components/AlertBanner.tsx";
-import ButtonGroup from "@components/ButtonGroup.tsx";
-import CardDouble from "@components/CardDouble.tsx";
-import Input from "@components/Input.tsx";
+import AlertBanner from "./AlertBanner.tsx";
+import ButtonGroup from "./ButtonGroup.tsx";
+import CardDouble from "./CardDouble.tsx";
+import Input from "./Input.tsx";
 
 const styles = {
   root: "p-0",

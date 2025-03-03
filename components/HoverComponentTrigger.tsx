@@ -1,9 +1,9 @@
 import * as React from "react";
-import * as Position from "@common/position.ts";
+import * as Position from "../common/position.ts";
 
-import OutsideElementEvent from "@components/detectors/OutsideElementEvent.tsx";
-import Popover from "@components/Popover.tsx";
-import Tooltip from "@components/Tooltip.tsx";
+import OutsideElementEvent from "./detectors/OutsideElementEvent.tsx";
+import Popover from "./Popover.tsx";
+import Tooltip from "./Tooltip.tsx";
 
 import { createPortal } from "react-dom";
 

@@ -1,7 +1,7 @@
 // NOTE(jimmylee)
 // Vendored from
 // https://github.com/JohannesKlauss/react-hotkeys-hook/blob/main/src/HotkeysProvider.tsx
-import { Hotkey } from "@modules/hotkeys/types";
+import { Hotkey } from "./types.ts";
 import {
   createContext,
   ReactNode,
@@ -9,9 +9,9 @@ import {
   useContext,
   useCallback,
 } from "react";
-import BoundHotkeysProxyProviderProvider from "@modules/hotkeys/bound-hotkeys-proxy-provider";
+import BoundHotkeysProxyProviderProvider from "./bound-hotkeys-proxy-provider.tsx";
 
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../../common/utilities.ts";
 
 export type HotkeysContextType = {
   hotkeys: ReadonlyArray<Hotkey>;

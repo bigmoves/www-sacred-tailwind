@@ -1,14 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 
-import ActionButton from '@components/ActionButton';
-import ActionListItem from '@components/ActionListItem';
-import ModalTrigger from '@components/ModalTrigger';
+import ActionButton from "./ActionButton.tsx";
+import ActionListItem from "./ActionListItem.tsx";
+import ModalTrigger from "./ModalTrigger.tsx";
 
-import { useHotkeys } from '@modules/hotkeys';
+import { useHotkeys } from "../modules/hotkeys/index.ts";
 
 const styles = {
   root: "block bg-[var(--theme-border)] font-normal",
-  footer: "bg-[var(--theme-background-modal-footer)] px-[1ch] py-[calc(var(--font-size)*0.5*var(--theme-line-height-base))]"
+  footer:
+    "bg-[var(--theme-background-modal-footer)] px-[1ch] py-[calc(var(--font-size)*0.5*var(--theme-line-height-base))]",
 };
 
 export interface DropdownMenuItemProps {
@@ -21,67 +22,74 @@ export interface DropdownMenuItemProps {
   modalProps?: Record<string, unknown>;
 }
 
-export interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DropdownMenuProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: (event?: MouseEvent | TouchEvent | KeyboardEvent) => void;
   items?: DropdownMenuItemProps[];
 }
 
-export const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>((props, ref) => {
-  const { onClose, items, style, ...rest } = props;
+export const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
+  (props, ref) => {
+    const { onClose, items, style, ...rest } = props;
 
-  const handleHotkey = () => {
-    if (onClose) onClose();
-  };
+    const handleHotkey = () => {
+      if (onClose) onClose();
+    };
 
-  useHotkeys('space', handleHotkey);
+    useHotkeys("space", handleHotkey);
 
-  return (
-    <div ref={ref} className={styles.root} style={style} {...rest}>
-      {items &&
-        items.map((each, index) => {
-          if (each.modal) {
+    return (
+      <div ref={ref} className={styles.root} style={style} {...rest}>
+        {items &&
+          items.map((each, index) => {
+            if (each.modal) {
+              return (
+                <ModalTrigger
+                  key={`action-items-${index}`}
+                  modal={each.modal}
+                  modalProps={each.modalProps}
+                >
+                  <ActionListItem children={each.children} icon={each.icon} />
+                </ModalTrigger>
+              );
+            }
+
             return (
-              <ModalTrigger key={`action-items-${index}`} modal={each.modal} modalProps={each.modalProps}>
-                <ActionListItem children={each.children} icon={each.icon} />
-              </ModalTrigger>
+              <ActionListItem
+                key={`action-items-${index}`}
+                children={each.children}
+                icon={each.icon}
+                href={each.href}
+                target={each.target}
+                onClick={() => {
+                  if (each.onClick) {
+                    each.onClick();
+                  }
+
+                  if (onClose) {
+                    onClose();
+                  }
+                }}
+              />
             );
-          }
+          })}
 
-          return (
-            <ActionListItem
-              key={`action-items-${index}`}
-              children={each.children}
-              icon={each.icon}
-              href={each.href}
-              target={each.target}
-              onClick={() => {
-                if (each.onClick) {
-                  each.onClick();
-                }
+        <footer className={styles.footer}>
+          Press space to{" "}
+          <ActionButton
+            hotkey="␣"
+            onClick={() => {
+              if (onClose) onClose();
+            }}
+          >
+            Close
+          </ActionButton>
+        </footer>
+      </div>
+    );
+  }
+);
 
-                if (onClose) {
-                  onClose();
-                }
-              }}
-            />
-          );
-        })}
-
-      <footer className={styles.footer}>
-        Press space to{' '}
-        <ActionButton
-          hotkey="␣"
-          onClick={() => {
-            if (onClose) onClose();
-          }}
-        >
-          Close
-        </ActionButton>
-      </footer>
-    </div>
-  );
-});
-
-DropdownMenu.displayName = 'DropdownMenu';
+DropdownMenu.displayName = "DropdownMenu";
 
 export default DropdownMenu;

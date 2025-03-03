@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../common/utilities.ts";
 
 export interface CheckboxProps {
   style?: React.CSSProperties;

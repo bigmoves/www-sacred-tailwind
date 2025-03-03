@@ -1,13 +1,13 @@
 import clsx from "clsx";
 import * as React from "react";
 
-import { useModals } from "@components/page/ModalContext";
+import { useModals } from "../page/ModalContext.tsx";
 
-import Button from "@components/Button";
-import CardDouble from "@components/CardDouble";
-import Checkbox from "@components/Checkbox";
-import Input from "@components/Input";
-import RadioButtonGroup from "@components/RadioButtonGroup";
+import Button from "../Button.tsx";
+import CardDouble from "../CardDouble.tsx";
+import Checkbox from "../Checkbox.tsx";
+import Input from "../Input.tsx";
+import RadioButtonGroup from "../RadioButtonGroup.tsx";
 
 const styles = {
   root: "animate-fadeIn bg-[var(--theme-background-modal)] shadow-[0_0_0_1ch_var(--theme-border-subdued)] block font-normal mx-auto max-w-[64ch] px-[2ch] py-[calc(var(--font-size)*var(--theme-line-height-base))] select-none w-full",

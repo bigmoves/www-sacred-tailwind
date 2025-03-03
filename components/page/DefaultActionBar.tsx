@@ -1,10 +1,10 @@
 import * as React from "react";
-import * as Utilities from "@common/utilities.ts";
+import * as Utilities from "../../common/utilities.ts";
 
-import { toggleDebugGrid } from "@components/DebugGrid.tsx";
-import { useHotkeys } from "@modules/hotkeys/index.ts";
+import { toggleDebugGrid } from "../DebugGrid.tsx";
+import { useHotkeys } from "../../modules/hotkeys/index.ts";
 
-import ActionBar from "@components/ActionBar.tsx";
+import ActionBar from "../ActionBar.tsx";
 
 const styles = {
   root: "fixed top-0 left-[2ch] z-[1]",

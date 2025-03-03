@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { ModalProvider } from "@components/page/ModalContext.tsx";
-import { ThemeProvider } from "@components/ThemeProvider.tsx";
+import { ModalProvider } from "./page/ModalContext.tsx";
+import { ThemeProvider } from "./ThemeProvider.tsx";
 
 export interface ProvidersProps {
   children: React.ReactNode;
