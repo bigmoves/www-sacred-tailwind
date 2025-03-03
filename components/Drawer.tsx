@@ -15,7 +15,7 @@ interface DrawerProps
   defaultValue?: boolean;
 }
 
-const Drawer: React.FC<DrawerProps> = ({
+export const Drawer: React.FC<DrawerProps> = ({
   children,
   defaultValue = false,
   ...rest

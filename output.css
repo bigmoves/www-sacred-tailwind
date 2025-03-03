@@ -594,20 +594,8 @@ body::-webkit-scrollbar-thumb:hover {
   pointer-events: auto;
 }
 
-.visible {
-  visibility: visible;
-}
-
 .invisible {
   visibility: hidden;
-}
-
-.collapse {
-  visibility: collapse;
-}
-
-.static {
-  position: static;
 }
 
 .fixed {
@@ -708,10 +696,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 .inline-block {
   display: inline-block;
-}
-
-.inline {
-  display: inline;
 }
 
 .\!flex {
@@ -926,10 +910,6 @@ body::-webkit-scrollbar-thumb:hover {
   flex-shrink: 0;
 }
 
-.grow {
-  flex-grow: 1;
-}
-
 .border-collapse {
   border-collapse: collapse;
 }
@@ -1139,10 +1119,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 .break-words {
   overflow-wrap: break-word;
-}
-
-.rounded {
-  border-radius: 0.25rem;
 }
 
 .border-0 {
